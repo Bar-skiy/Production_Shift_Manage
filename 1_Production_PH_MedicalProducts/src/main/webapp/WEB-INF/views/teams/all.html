@@ -8,7 +8,7 @@
 
 <div th:each="team_th : ${teams}">
 
-    <a th:href="@{/teams/{team_id(}(team_id=${team_th.getTeam_id()})}"
+    <a th:href="@{/teams/{team_id}(team_id=${team_th.getTeam_id()})}"
        th:text="${team_th.getName_leader() +
        ' . . . . . . ' + team_th.getIdentifier()}"> В это место вставляются данные слева </a>
     <br/>

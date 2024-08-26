@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>People</title>
+</head>
+<body>
+
+<p th:text="${team.getName_leader() + ', ' + team.getTeam_id()}"> </p>
+
+<p th:text="${team.getTeam_id()}"> </p>
+
+<a th:href="@{/team/{getTeam_id}/edit(id=${team.getTeam_id()})}">Изменение данных</a>
+
+<br>
+<hr>
+
+<form th:method="DELETE" th:action="@{/team/{team_id}(team_id=${team.getTeam_id()})}">
+    <input type="submit" value="Удалить">
+</form>
+
+</body>
+</html>

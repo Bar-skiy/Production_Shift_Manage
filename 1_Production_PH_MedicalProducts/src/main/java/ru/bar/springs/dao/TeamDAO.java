@@ -6,9 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.bar.springs.models.Team;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -21,8 +18,13 @@ public class TeamDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Team> indexInDao() {
+    public List<Team> allInDao() {
         System.out.println("ddd");
         return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
    }
+
+    public Team selectedInDao(int team_id) {
+        return jdbcTemplate.query("SELECT * FROM Team WHERE team_id=?", new Object[]{team_id},
+                new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
+    }
 }
