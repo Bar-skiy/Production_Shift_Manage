@@ -6,9 +6,11 @@
 </head>
 <body>
 
-<p th:text="${team.getName_leader() + ', ' + team.getTeam_id()}"> </p>
-
 <p th:text="${team.getTeam_id()}"> </p>
+<p th:text="${'Производственная команда №:  ' + team.getIdentifier()}"> </p>
+<p th:text="${'Лидер смены:                 '+ team.getName_leader()}"> </p>
+
+<br>
 
 <a th:href="@{/team/{getTeam_id}/edit(id=${team.getTeam_id()})}">Изменение данных</a>
 
