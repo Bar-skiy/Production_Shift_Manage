@@ -1,7 +1,6 @@
 package ru.bar.springs.models;
 
 import jakarta.validation.constraints.*;
-import org.springframework.stereotype.Component;
 
 public class Person {
 
