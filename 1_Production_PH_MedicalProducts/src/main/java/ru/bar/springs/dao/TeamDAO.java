@@ -32,4 +32,8 @@ public class TeamDAO {
         jdbcTemplate.update("INSERT INTO Team (name_leader, identifier) VALUES (?, ?)",
                 team.getName_leader(), team.getIdentifier());
     }
+
+    public void deleteInDao(int team_id) {
+        jdbcTemplate.update("DELETE FROM Team WHERE team_id=?", team_id);
+    }
 }

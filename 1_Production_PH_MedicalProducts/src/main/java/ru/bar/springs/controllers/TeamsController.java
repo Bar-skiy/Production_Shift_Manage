@@ -54,5 +54,11 @@ public class TeamsController {
         return "redirect:/teams";
     }
 
+    //Удаление записи
+    @DeleteMapping("/{team_id}")
+    public String deleteInController(@PathVariable("team_id") int team_id) {
+        teamDAO.deleteInDao(team_id);
+        return "redirect:/teams";
 
+    }
 }
