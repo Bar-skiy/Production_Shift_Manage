@@ -20,30 +20,27 @@ public class TeamsController {
         this.teamDAO = teamDAO;
     }
 
-    //Отображение всех записей
+    // Отображение всех записей
     @GetMapping
-    public String allInController(Model model) {
-        // Получим всех людей из DAO и передадим на отображение в представление
-        System.out.println(model.addAttribute("teams", teamDAO.allInDao()));
+    public String allShowInController(Model model) {
+        System.out.println(model.addAttribute("teams", teamDAO.AllSelectInDao()));
         return "teams/all";
     }
 
     //отображение одной записи
     @GetMapping("/{team_id}")
-    public String selectedInController(@PathVariable("team_id") int team_id, Model model) {
-        // Получим одного человека из DAO и передадим на отображение в представление
-        model.addAttribute("team", teamDAO.selectedInDao(team_id));
-        return "teams/selected";
+    public String itemShowInController(@PathVariable("team_id") int team_id, Model model) {
+        model.addAttribute("team", teamDAO.itemSelectInDao(team_id));
+        return "teams/item";
     }
 
-    //Отображение формы создания новой записи
+    // Отображение формы создания новой записи
     @GetMapping("/new")
-    public String newPersonInController(@ModelAttribute("team_new") Team team) {
-        //Создаем объект с пустым конструктором и передадим его для Thymeleaf template
+    public String formCreateInController(@ModelAttribute("team_new") Team team) {
         return "teams/new";
     }
 
-    //Создание новой записи
+    // Создание новой записи
     @PostMapping
     public String createInController(
             @ModelAttribute("team_new") @Valid Team team, BindingResult bindingResult) {
@@ -54,11 +51,31 @@ public class TeamsController {
         return "redirect:/teams";
     }
 
-    //Удаление записи
+    // Удаление записи
     @DeleteMapping("/{team_id}")
     public String deleteInController(@PathVariable("team_id") int team_id) {
         teamDAO.deleteInDao(team_id);
         return "redirect:/teams";
-
     }
+
+    // Отображение формы изменения записи
+    @GetMapping("/{team_id}/edit")
+    public String formEditInController(Model model, @PathVariable("team_id") int team_id) {
+        model.addAttribute("team_edit", teamDAO.itemSelectInDao(team_id));
+        return "teams/edit";
+    }
+
+    // Обновление записи
+    @PatchMapping("/{team_id}")
+    public String updateInController(@ModelAttribute("team_edit") @Valid Team team,
+                                     BindingResult bindingResult,
+                                     @PathVariable("team_id") int team_id) {
+
+        if (bindingResult.hasErrors())
+            return "teams/edit";
+
+        teamDAO.updateInDao(team_id, team);
+        return "redirect:/teams";
+    }
+
 }

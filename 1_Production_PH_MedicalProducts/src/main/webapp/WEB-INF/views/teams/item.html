@@ -12,13 +12,13 @@
 
 <br>
 
-<a th:href="@{/team/{getTeam_id}/edit(id=${team.getTeam_id()})}">Изменение данных</a>
+<a th:href="@{/teams/{team_id}/edit(team_id=${team.getTeam_id()})}">Изменение данных</a>
 
 <br>
 <hr>
 
 <form th:method="DELETE" th:action="@{/teams/{team_id}(team_id=${team.getTeam_id()})}">
-    <input type="submit" value="Удалить">
+    <input type="submit" value="Удалить!">
 </form>
 
 </body>

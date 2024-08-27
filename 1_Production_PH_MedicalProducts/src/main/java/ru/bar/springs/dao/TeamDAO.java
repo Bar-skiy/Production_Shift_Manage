@@ -18,12 +18,12 @@ public class TeamDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Team> allInDao() {
+    public List<Team> AllSelectInDao() {
         System.out.println("ddd");
         return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
-   }
+    }
 
-    public Team selectedInDao(int team_id) {
+    public Team itemSelectInDao(int team_id) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE team_id=?", new Object[]{team_id},
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
     }
@@ -35,5 +35,10 @@ public class TeamDAO {
 
     public void deleteInDao(int team_id) {
         jdbcTemplate.update("DELETE FROM Team WHERE team_id=?", team_id);
+    }
+
+    public void updateInDao(int team_id, Team team) {
+        jdbcTemplate.update("UPDATE Team SET name_leader=?, identifier=? WHERE team_id=?",
+                team.getName_leader(), team.getIdentifier(), team_id);
     }
 }
