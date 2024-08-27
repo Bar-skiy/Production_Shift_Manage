@@ -23,6 +23,16 @@ public class TeamDAO {
         return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
     }
 
+    public Team itemSelectNameInDao(String name_leader){
+        return jdbcTemplate.query("SELECT * FROM Team WHERE name_leader=?", new Object[]{name_leader},
+                new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
+    }
+
+    public Team itemSelectIdentifierInDao(int identifier) {
+        return jdbcTemplate.query("SELECT * FROM Team WHERE identifier=?", new Object[]{identifier},
+                new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
+    }
+
     public Team itemSelectInDao(int team_id) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE team_id=?", new Object[]{team_id},
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);

@@ -8,16 +8,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bar.springs.dao.TeamDAO;
 import ru.bar.springs.models.Team;
+import ru.bar.springs.util.TeamValidator;
 
 @Controller
 @RequestMapping("/teams")
 public class TeamsController {
 
     private final TeamDAO teamDAO;
+    private final TeamValidator teamValidator;
 
     @Autowired
-    public TeamsController(TeamDAO teamDAO) {
+    public TeamsController(TeamDAO teamDAO, TeamValidator teamValidator) {
         this.teamDAO = teamDAO;
+        this.teamValidator = teamValidator;
     }
 
     // Отображение всех записей
@@ -44,6 +47,8 @@ public class TeamsController {
     @PostMapping
     public String createInController(
             @ModelAttribute("team_new") @Valid Team team, BindingResult bindingResult) {
+        teamValidator.validate(team, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "teams/new";
         }
@@ -70,6 +75,7 @@ public class TeamsController {
     public String updateInController(@ModelAttribute("team_edit") @Valid Team team,
                                      BindingResult bindingResult,
                                      @PathVariable("team_id") int team_id) {
+        teamValidator.validate(team, bindingResult);
 
         if (bindingResult.hasErrors())
             return "teams/edit";

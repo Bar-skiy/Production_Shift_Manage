@@ -13,7 +13,7 @@ public class Team {
     @Size(min = 2, max = 100, message = "The number of characters in a name can be from 2 to 100!")
     private String name_leader;
 
-    @Min(value = 1000, message = "Number must be greater than 1000!")
+    @Min(value = 1001, message = "Number must be greater than 1000!")
     @Max(value = 5009, message = "Number must be less than 5009!")
     private int identifier;
 
