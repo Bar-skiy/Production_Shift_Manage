@@ -1,12 +1,13 @@
 package ru.bar.springs.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.bar.springs.dao.TeamDAO;
+import ru.bar.springs.models.Team;
 
 @Controller
 @RequestMapping("/teams")
@@ -14,14 +15,12 @@ public class TeamsController {
 
     private final TeamDAO teamDAO;
 
-    //Внедряем personDAO в конструктор class PeopleController
     @Autowired
     public TeamsController(TeamDAO teamDAO) {
         this.teamDAO = teamDAO;
     }
 
     //Отображение всех записей
-    //название метода не важно, ни где явно не используется, @GetMapping нужен для выполнения метода по запросу по определенному адресу из браузера
     @GetMapping
     public String allInController(Model model) {
         // Получим всех людей из DAO и передадим на отображение в представление
@@ -30,12 +29,30 @@ public class TeamsController {
     }
 
     //отображение одной записи
-    //@PathVariable - извлекает id из запроса
     @GetMapping("/{team_id}")
     public String selectedInController(@PathVariable("team_id") int team_id, Model model) {
         // Получим одного человека из DAO и передадим на отображение в представление
         model.addAttribute("team", teamDAO.selectedInDao(team_id));
         return "teams/selected";
-
     }
+
+    //Отображение формы создания новой записи
+    @GetMapping("/new")
+    public String newPersonInController(@ModelAttribute("team_new") Team team) {
+        //Создаем объект с пустым конструктором и передадим его для Thymeleaf template
+        return "teams/new";
+    }
+
+    //Создание новой записи
+    @PostMapping
+    public String createInController(
+            @ModelAttribute("team_new") @Valid Team team, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "teams/new";
+        }
+        teamDAO.saveInDao(team);
+        return "redirect:/teams";
+    }
+
+
 }

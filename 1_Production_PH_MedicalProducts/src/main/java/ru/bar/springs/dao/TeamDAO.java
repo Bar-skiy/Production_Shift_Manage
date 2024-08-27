@@ -27,4 +27,9 @@ public class TeamDAO {
         return jdbcTemplate.query("SELECT * FROM Team WHERE team_id=?", new Object[]{team_id},
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
     }
+
+    public void saveInDao(Team team) {
+        jdbcTemplate.update("INSERT INTO Team (name_leader, identifier) VALUES (?, ?)",
+                team.getName_leader(), team.getIdentifier());
+    }
 }
