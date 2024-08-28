@@ -14,8 +14,8 @@ public class Employee {
     @Size(min = 2, max = 100, message = "The number of characters in a name can be from 2 to 100!")
     public String employee_name;
 
-    @Min(value = 1900, message = "Birth year must be greater than 1900!")
-    @Max(value = 2030, message = "Birth year be less than 2030!")
+    @Min(value = 1901, message = "Birth year must be greater than 1900!")
+    @Max(value = 2029, message = "Birth year be less than 2030!")
     public int birth_year;
 
     @NotEmpty(message = "The field cannot be empty!")

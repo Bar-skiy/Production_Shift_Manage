@@ -2,22 +2,23 @@
 <html lang="en"  xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Team</title>
+    <title>Сотрудник</title>
 </head>
 <body>
 
-<p th:text="${team.getTeam_id()}"> </p>
-<p th:text="${'Производственная команда №:  ' + team.getIdentifier()}"> </p>
-<p th:text="${'Лидер смены:                 '+ team.getName_leader()}"> </p>
+<p th:text="${employee.getEmployee_id()}"> </p>
+<p th:text="${'Ф.И.О. сотрудника: ' + employee.getEmployee_name()}"> </p>
+<p th:text="${'Год рождения сотрудника: '+ employee.getBirth_year()}"> </p>
+<p th:text="${'Должность сотрудника: '+ employee.getFunction()}"> </p>
 
 <br>
 
-<a th:href="@{/teams/{team_id}/edit(team_id=${team.getTeam_id()})}">Изменение данных</a>
+<a th:href="@{/employees/{employee_id}/edit(employee_id=${employee.getEmployee_id()})}">Изменение данных</a>
 
 <br>
 <hr>
 
-<form th:method="DELETE" th:action="@{/teams/{team_id}(team_id=${team.getTeam_id()})}">
+<form th:method="DELETE" th:action="@{/employees/{employee_id}(employee_id=${employee.getEmployee_id()})}">
     <input type="submit" value="Удалить!">
 </form>
 

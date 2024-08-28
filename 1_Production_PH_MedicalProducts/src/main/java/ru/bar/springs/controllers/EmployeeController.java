@@ -47,7 +47,6 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             return "employees/new";
         }
-        System.out.println();
         employeeDAO.saveInDao(employee);
         return "redirect:/employees";
     }

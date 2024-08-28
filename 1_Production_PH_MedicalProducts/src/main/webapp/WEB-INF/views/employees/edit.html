@@ -2,21 +2,27 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update team</title>
+    <title>Обновить данные</title>
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/teams/{team_id}(team_id=${team_edit.getTeam_id()})}" th:object="${team_edit}">
+<form th:method="PATCH" th:action="@{/employees/{employee_id}(employee_id=${employee_edit.getEmployee_id()})}" th:object="${employee_edit}">
 
     <label for="name_label">Enter name: </label>
-    <input type="text" th:field="*{name_leader}" id="name_label"/>
-    <div style="color: red" th:if="${#fields.hasErrors('name_leader')}" th:errors="*{name_leader}">
+    <input type="text" th:field="*{employee_name}" id="name_label"/>
+    <div style="color: red" th:if="${#fields.hasErrors('employee_name')}" th:errors="*{employee_name}">
         Здесь будет сообщение об ошибке из Person.java</div>
     <br>
     <br>
-    <label for="identifier">Введите идентификатор: </label>
-    <input type="text" th:field="*{identifier}" id="identifier"/>
-    <div style="color: red" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}">
+    <label for="birth_year">Введите идентификатор: </label>
+    <input type="text" th:field="*{birth_year}" id="birth_year"/>
+    <div style="color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}">
+        Здесь будет сообщение об ошибке из Person.java</div>
+    <br>
+    <br>
+    <label for="function">Введите идентификатор: </label>
+    <input type="text" th:field="*{function}" id="function"/>
+    <div style="color: red" th:if="${#fields.hasErrors('function')}" th:errors="*{function}">
         Здесь будет сообщение об ошибке из Person.java</div>
     <br>
     <hr>

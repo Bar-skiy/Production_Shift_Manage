@@ -26,7 +26,7 @@ public class TeamsController {
     // Отображение всех записей
     @GetMapping
     public String allShowInController(Model model) {
-        System.out.println(model.addAttribute("teams", teamDAO.AllSelectInDao()));
+        model.addAttribute("teams", teamDAO.AllSelectInDao());
         return "teams/all";
     }
 
