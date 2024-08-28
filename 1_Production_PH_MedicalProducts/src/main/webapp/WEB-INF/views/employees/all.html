@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All employees</title>
+</head>
+<body>
+
+<div th:each="employee_th : ${employees}">
+
+    <a th:href="@{/employees/{employee_id}(employee_id=${employee_th.getEmployee_id()})}"
+       th:text="${employee_th.getEmployee_name() +
+       ' . . . . . . ' + employee_th.getBirth_year() +
+       ' . . . . . . ' + employee_th.getFunction()}"> //// В это место вставляются данные слева </a>
+    <br/>
+    <br/>
+</div>
+
+
+
+<br/>
+<hr/>
+<a href="employees/new">Создать новую производственную команду</a>
+</body>
+</html>

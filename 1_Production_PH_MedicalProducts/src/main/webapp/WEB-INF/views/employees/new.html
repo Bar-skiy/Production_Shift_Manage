@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New employee</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/employees}" th:object="${employee_new}">
+
+    <label for="name">Введите Имя и Фамилию сотрудника: </label>
+    <input type="text" th:field="*{employee_name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('employee_name')}" th:errors="*{employee_name}">
+        здесь будет сообщение об ошибке из Person.java</div>
+    <br>
+    <br>
+    <label for="birth_year">Введите год рождения сотрудника: </label>
+    <input type="text" th:field="*{birth_year}" id="birth_year"/>
+    <div style="color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}"></div>
+    <br>
+    <br>
+    <label for="function">Введите должность сотрудника: </label>
+    <input type="text" th:field="*{function}" id="function"/>
+    <div style="color: red" th:if="${#fields.hasErrors('function')}" th:errors="*{function}"></div>
+    <br>
+    <hr>
+    <input type="submit" value="Cоздать"/>
+</form>
+
+</body>
+</html>

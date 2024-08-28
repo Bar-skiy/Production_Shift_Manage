@@ -19,11 +19,11 @@ public class TeamDAO {
     }
 
     public List<Team> AllSelectInDao() {
-        System.out.println("ddd");
+
         return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
     }
 
-    public Team itemSelectNameInDao(String name_leader){
+    public Team itemSelectNameInDao(String name_leader) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE name_leader=?", new Object[]{name_leader},
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
     }
