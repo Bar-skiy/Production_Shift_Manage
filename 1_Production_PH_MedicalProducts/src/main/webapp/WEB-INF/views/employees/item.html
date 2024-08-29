@@ -11,13 +11,24 @@
 <p th:text="${'Год рождения сотрудника: '+ employee.getBirth_year()}"> </p>
 <p th:text="${'Должность сотрудника: '+ employee.getFunction()}"> </p>
 
+<p th:text="${join_ident} != null ? 'Этот сотрудник состоит в команде: ' :'Этот сотрудник свободен'"></p>
+<p th:text="${join_ident}"></p>
+
+
+
+
+<form th:method="PATCH" th:action="@{/employees/unpin/{employee_id}(employee_id=${employee.getEmployee_id()})}">
+    <input type="submit" value=  "Открепить!">
+</form>
+
+
+
+
 <br>
-
-<a th:href="@{/employees/{employee_id}/edit(employee_id=${employee.getEmployee_id()})}">Изменение данных</a>
-
+<a th:href="@{/employees/{employee_id}/edit(employee_id=${employee.getEmployee_id()})}">
+    Изменение данных</a>
 <br>
 <hr>
-
 <form th:method="DELETE" th:action="@{/employees/{employee_id}(employee_id=${employee.getEmployee_id()})}">
     <input type="submit" value="Удалить!">
 </form>

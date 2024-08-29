@@ -19,7 +19,16 @@ public class EmployeeDAO {
     }
 
     public List<Employee> AllSelectInDao() {
-        return jdbcTemplate.query("SELECT * FROM Employee", new BeanPropertyRowMapper<>(Employee.class));
+        List<Employee> all = jdbcTemplate.query("SELECT * FROM Employee", new BeanPropertyRowMapper<>(Employee.class));
+   if (all.isEmpty()) {return null;}
+   return all;
+    }
+
+
+    public Integer joinIdentInDao(int employee_id) {
+        return jdbcTemplate.queryForObject("SELECT (SELECT identifier FROM team JOIN employee " +
+                "ON team.team_id = employee.team_id where employee_id = ?) AS value", Integer.class, employee_id);
+
     }
 
     public Employee itemSelectInDao(int employee_id) {
@@ -41,4 +50,7 @@ public class EmployeeDAO {
                 employee.getEmployee_name(), employee.getBirth_year(), employee.getFunction(), employee_id);
     }
 
+    public void unpinInDao(int employee_id) {
+        jdbcTemplate.update("UPDATE public.employee SET team_id = null WHERE employee_id = ?;", employee_id);
+    }
 }

@@ -30,6 +30,7 @@ public class EmployeeController {
     @GetMapping("/{employee_id}")
     public String itemShowInController(@PathVariable("employee_id") int employee_id, Model model) {
         model.addAttribute("employee", employeeDAO.itemSelectInDao(employee_id));
+        model.addAttribute("join_ident", employeeDAO.joinIdentInDao(employee_id));
         return "employees/item";
     }
 
@@ -70,11 +71,16 @@ public class EmployeeController {
     public String updateInController(@ModelAttribute("employee_edit") @Valid Employee employee,
                                      BindingResult bindingResult,
                                      @PathVariable("employee_id") int employee_id) {
-
         if (bindingResult.hasErrors())
             return "employees/edit";
 
         employeeDAO.updateInDao(employee_id, employee);
+        return "redirect:/employees";
+    }
+
+    @PatchMapping("/unpin/{employee_id}")
+    public String unpinInController( @PathVariable("employee_id") int employee_id) {
+        employeeDAO.unpinInDao(employee_id);
         return "redirect:/employees";
     }
 
