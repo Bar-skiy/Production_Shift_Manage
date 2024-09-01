@@ -51,6 +51,11 @@ public class EmployeeDAO {
     }
 
     public void unpinInDao(int employee_id) {
-        jdbcTemplate.update("UPDATE public.employee SET team_id = null WHERE employee_id = ?;", employee_id);
+        jdbcTemplate.update("UPDATE employee SET team_id = null WHERE employee_id = ?;", employee_id);
+    }
+
+    public void assignInDao(int team_id, int employee_id) {
+        jdbcTemplate.update("UPDATE employee SET team_id = ? WHERE employee_id = ?;", team_id, employee_id);
     }
 }
+

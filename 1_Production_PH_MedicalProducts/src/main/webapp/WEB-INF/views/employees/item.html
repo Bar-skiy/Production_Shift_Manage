@@ -14,17 +14,24 @@
 <p th:text="${join_ident} != null ? 'Этот сотрудник состоит в команде: ' :'Этот сотрудник свободен'"></p>
 <p th:text="${join_ident}"></p>
 
-
-
-
 <form th:method="PATCH" th:action="@{/employees/unpin/{employee_id}(employee_id=${employee.getEmployee_id()})}">
     <input type="submit" value=  "Открепить!">
 </form>
-
-
-
-
+<hr>
 <br>
+
+<form th:method="PATCH" th:action="@{/employees/assign/{employee_id}(employee_id=${employee.getEmployee_id()})}">
+    <label for="p_label">Выберите человека:</label>
+
+    <select th:object="${team}" th:field="*{team_id}" id="p_label">
+        <option th:each="team_th : ${teams}" th:value="${team_th.getTeam_id()}"
+                th:text="${team_th.getIdentifier()}"></option>
+    </select>
+
+    <input type="submit" value="Назначить в команду">
+</form>
+<br>
+<hr>
 <a th:href="@{/employees/{employee_id}/edit(employee_id=${employee.getEmployee_id()})}">
     Изменение данных</a>
 <br>

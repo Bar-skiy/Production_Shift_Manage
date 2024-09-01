@@ -6,17 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.bar.springs.dao.EmployeeDAO;
+import ru.bar.springs.dao.TeamDAO;
 import ru.bar.springs.models.Employee;
+import ru.bar.springs.models.Team;
 
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
 
-
     private final EmployeeDAO employeeDAO;
+    private final TeamDAO teamDAO;
 
-    public EmployeeController(EmployeeDAO employeeDAO) {
+    public EmployeeController(EmployeeDAO employeeDAO, TeamDAO teamDAO) {
         this.employeeDAO = employeeDAO;
+        this.teamDAO = teamDAO;
     }
 
     // Отображение всех записей
@@ -28,9 +31,14 @@ public class EmployeeController {
 
     //отображение одной записи
     @GetMapping("/{employee_id}")
-    public String itemShowInController(@PathVariable("employee_id") int employee_id, Model model) {
+    public String itemShowInController(Model model, @PathVariable("employee_id") int employee_id,
+                                       @ModelAttribute("team") Team team) {
         model.addAttribute("employee", employeeDAO.itemSelectInDao(employee_id));
+        //для отображения команды сотрудника
         model.addAttribute("join_ident", employeeDAO.joinIdentInDao(employee_id));
+        //для отображения выпадающего списка команд
+        model.addAttribute("teams", teamDAO.AllSelectInDao());
+
         return "employees/item";
     }
 
@@ -78,10 +86,18 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
+    // Открепление сотрудника от команды
     @PatchMapping("/unpin/{employee_id}")
-    public String unpinInController( @PathVariable("employee_id") int employee_id) {
+    public String unpinInController(@PathVariable("employee_id") int employee_id) {
         employeeDAO.unpinInDao(employee_id);
         return "redirect:/employees";
     }
 
+    //Прикрепление сотрудника к команде
+    @PatchMapping("/assign/{employee_id}")
+    public String assignInController(@PathVariable("employee_id") int employee_id,
+                                     @ModelAttribute("team_id_th")Team team) {
+        employeeDAO.assignInDao(team.getTeam_id(), employee_id);
+        return "redirect:/employees";
+    }
 }

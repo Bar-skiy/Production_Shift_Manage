@@ -8,13 +8,13 @@
 
 <form th:method="PATCH" th:action="@{/teams/{team_id}(team_id=${team_edit.getTeam_id()})}" th:object="${team_edit}">
 
-    <label for="name_label">Enter name: </label>
+    <label for="name_label">Введите Имя и Фамилию лидера команды: </label>
     <input type="text" th:field="*{name_leader}" id="name_label"/>
     <div style="color: red" th:if="${#fields.hasErrors('name_leader')}" th:errors="*{name_leader}">
         Здесь будет сообщение об ошибке из Person.java</div>
     <br>
     <br>
-    <label for="identifier">Введите идентификатор: </label>
+    <label for="identifier">Введите идентификатор команды: </label>
     <input type="text" th:field="*{identifier}" id="identifier"/>
     <div style="color: red" th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}">
         Здесь будет сообщение об ошибке из Person.java</div>

@@ -14,13 +14,13 @@
         Здесь будет сообщение об ошибке из Person.java</div>
     <br>
     <br>
-    <label for="birth_year">Введите идентификатор: </label>
+    <label for="birth_year">Введите год рождения сотрудника: </label>
     <input type="text" th:field="*{birth_year}" id="birth_year"/>
     <div style="color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}">
         Здесь будет сообщение об ошибке из Person.java</div>
     <br>
     <br>
-    <label for="function">Введите идентификатор: </label>
+    <label for="function">Введите должность сотрудника: </label>
     <input type="text" th:field="*{function}" id="function"/>
     <div style="color: red" th:if="${#fields.hasErrors('function')}" th:errors="*{function}">
         Здесь будет сообщение об ошибке из Person.java</div>

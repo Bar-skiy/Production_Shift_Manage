@@ -34,7 +34,8 @@ public class TeamsController {
     @GetMapping("/{team_id}")
     public String itemShowInController(@PathVariable("team_id") int team_id, Model model) {
         model.addAttribute("team", teamDAO.itemSelectInDao(team_id));
-        System.out.println(model.addAttribute("empl_list_team", teamDAO.joinEmplInDao(team_id)));
+        //для показа листа сотрудников
+ model.addAttribute("empl_list_team", teamDAO.joinEmplInDao(team_id));
         return "teams/item";
     }
 
@@ -76,7 +77,7 @@ public class TeamsController {
     public String updateInController(@ModelAttribute("team_edit") @Valid Team team,
                                      BindingResult bindingResult,
                                      @PathVariable("team_id") int team_id) {
-        teamValidator.validate(team, bindingResult);
+//        teamValidator.validate(team, bindingResult);
 
         if (bindingResult.hasErrors())
             return "teams/edit";

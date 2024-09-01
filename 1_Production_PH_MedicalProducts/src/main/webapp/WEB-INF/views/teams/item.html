@@ -7,7 +7,7 @@
 <body>
 
 <p th:text="${'Производственная команда №:  ' + team.getIdentifier()}"> </p>
-<p th:text="${'Лидер смены:                 '+ team.getName_leader()}"> </p>
+<p th:text="${'Лидер производственной команды: '+ team.getName_leader()}"> </p>
 <hr>
 <h4> Состав команды</h4>
 <div th:each="employee_th : ${empl_list_team}">
@@ -18,10 +18,10 @@
     <br/>
 </div>
 <P th:text="${empl_list_team} != null ? '' : 'В команде пока нет сотрудников'"></P>
-
+<br>
 <hr>
 <a th:href="@{/teams/{team_id}/edit(team_id=${team.getTeam_id()})}">Изменение данных</a>
-<br>
+<hr>
 <form th:method="DELETE" th:action="@{/teams/{team_id}(team_id=${team.getTeam_id()})}">
     <input type="submit" value="Удалить!">
 </form>
