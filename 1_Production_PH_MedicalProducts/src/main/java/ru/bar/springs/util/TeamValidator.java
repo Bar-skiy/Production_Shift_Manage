@@ -28,10 +28,10 @@ public class TeamValidator implements Validator {
 
         if (teamDAO.itemSelectNameInDao(team.getName_leader()) != null)
             errors.rejectValue("name_leader", "Leader.exists",
-                    "Team-leader name already exists");
+                    "Лидер команды с таким ФИО уже существует");
 
         if (teamDAO.itemSelectIdentifierInDao(team.getIdentifier()) != null)
             errors.rejectValue("identifier", "Identifier.exists",
-                    "Identifier team already exists");
+                    "Идентификатор команды уже существует");
     }
 }

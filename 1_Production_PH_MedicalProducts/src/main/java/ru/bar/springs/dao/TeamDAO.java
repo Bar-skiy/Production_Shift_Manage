@@ -41,7 +41,7 @@ public class TeamDAO {
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
     }
 
-    public List<Employee> joinEmplInDao(int team_id) {
+    public List<Employee> getEmployeesInDao(int team_id) {
         List<Employee> empl = jdbcTemplate.query("SELECT  employee_name, birth_year, function FROM team" +
                 " JOIN employee ON team.team_id = employee.team_id where employee.team_id = ?",
                 new BeanPropertyRowMapper<>(Employee.class), team_id);

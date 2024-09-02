@@ -9,16 +9,16 @@ public class Team {
 
     private int team_id;
 
-    @NotEmpty(message = "The field cannot be empty!")
-    @Size(min = 2, max = 100, message = "The number of characters in a name can be from 2 to 100!")
+    @NotEmpty(message = "Поле не может быть пустым!")
+    @Size(min = 2, max = 100, message = "Количество строк должно быть больше 2 и меньше 100")
     private String name_leader;
 
-    @Min(value = 1001, message = "Number must be greater than 1000!")
-    @Max(value = 5009, message = "Number must be less than 5009!")
+
+    @Min(value = 1001, message = "Номер должен быть больше 1000")
+    @Max(value = 5009, message = "Номер должен быть меньше 5010!")
     private int identifier;
 
-    public Team() {
-    }
+    public Team() {}
 
     public Team(int team_id, String name_leader, int identifier) {
         this.team_id = team_id;

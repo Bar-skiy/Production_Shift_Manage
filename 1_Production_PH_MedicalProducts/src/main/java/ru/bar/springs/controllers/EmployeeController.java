@@ -36,7 +36,7 @@ public class EmployeeController {
         model.addAttribute("employee", employeeDAO.itemSelectInDao(employee_id));
         //для отображения команды сотрудника
         model.addAttribute("join_ident", employeeDAO.joinIdentInDao(employee_id));
-        //для отображения выпадающего списка команд
+        //для отображения выпадающего списка производственных команд
         model.addAttribute("teams", teamDAO.AllSelectInDao());
 
         return "employees/item";
