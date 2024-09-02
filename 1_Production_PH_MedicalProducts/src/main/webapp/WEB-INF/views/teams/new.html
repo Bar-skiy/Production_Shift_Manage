@@ -11,7 +11,8 @@
     <label for="name">Введите Имя и Фамилию лидера команды: </label>
     <input type="text" th:field="*{name_leader}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name_leader')}" th:errors="*{name_leader}">
-        здесь будет сообщение об ошибке из Person.java</div>
+        здесь будет сообщение об ошибке из Person.java
+    </div>
     <br>
     <br>
     <label for="identifier">Введите идентификатор произв. команды: </label>

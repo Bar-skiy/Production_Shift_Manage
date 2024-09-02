@@ -6,24 +6,28 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/employees/{employee_id}(employee_id=${employee_edit.getEmployee_id()})}" th:object="${employee_edit}">
+<form th:method="PATCH" th:action="@{/employees/{employee_id}(employee_id=${employee_edit.getEmployee_id()})}"
+      th:object="${employee_edit}">
 
     <label for="name_label">Enter name: </label>
     <input type="text" th:field="*{employee_name}" id="name_label"/>
     <div style="color: red" th:if="${#fields.hasErrors('employee_name')}" th:errors="*{employee_name}">
-        Здесь будет сообщение об ошибке из Person.java</div>
+        Здесь будет сообщение об ошибке из Person.java
+    </div>
     <br>
     <br>
     <label for="birth_year">Введите год рождения сотрудника: </label>
     <input type="text" th:field="*{birth_year}" id="birth_year"/>
     <div style="color: red" th:if="${#fields.hasErrors('birth_year')}" th:errors="*{birth_year}">
-        Здесь будет сообщение об ошибке из Person.java</div>
+        Здесь будет сообщение об ошибке из Person.java
+    </div>
     <br>
     <br>
     <label for="function">Введите должность сотрудника: </label>
     <input type="text" th:field="*{function}" id="function"/>
     <div style="color: red" th:if="${#fields.hasErrors('function')}" th:errors="*{function}">
-        Здесь будет сообщение об ошибке из Person.java</div>
+        Здесь будет сообщение об ошибке из Person.java
+    </div>
     <br>
     <hr>
     <br>

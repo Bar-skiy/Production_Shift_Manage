@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Производственная команда</title>
 </head>
 <body>
 
-<p th:text="${'Производственная команда №:  ' + team.getIdentifier()}"> </p>
-<p th:text="${'Лидер производственной команды: '+ team.getName_leader()}"> </p>
+<p th:text="${'Производственная команда №:  ' + team.getIdentifier()}"></p>
+<p th:text="${'Лидер производственной команды: '+ team.getName_leader()}"></p>
 <hr>
 <h4> Состав команды</h4>
 <div th:each="employee_th : ${empl_list_team}">

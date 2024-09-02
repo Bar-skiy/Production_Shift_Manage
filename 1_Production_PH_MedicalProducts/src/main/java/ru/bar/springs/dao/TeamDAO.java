@@ -21,15 +21,15 @@ public class TeamDAO {
     }
 
     public List<Team> AllSelectInDao() {
-         return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
+        return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
     }
 
-    public Optional <Team> itemSelectNameInDao(String name_leader) {
+    public Optional<Team> itemSelectNameInDao(String name_leader) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE name_leader=?", new Object[]{name_leader},
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny();
     }
 
-    public Optional <Team> itemSelectIdentifierInDao(int identifier) {
+    public Optional<Team> itemSelectIdentifierInDao(int identifier) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE identifier=?", new Object[]{identifier},
                 new BeanPropertyRowMapper<>(Team.class)).stream().findAny();
     }

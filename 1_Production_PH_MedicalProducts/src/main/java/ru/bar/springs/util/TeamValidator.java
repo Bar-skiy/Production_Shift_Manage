@@ -26,12 +26,14 @@ public class TeamValidator implements Validator {
     public void validate(Object target, Errors errors) {
         Team team = (Team) target;
 
-        if (teamDAO.itemSelectNameInDao(team.getName_leader()).isPresent()) {}
-            errors.rejectValue("name_leader", "Leader.exists",
-                    "Лидер команды с таким ФИО уже существует");
+        if (teamDAO.itemSelectNameInDao(team.getName_leader()).isPresent()) {
+        }
+        errors.rejectValue("name_leader", "Leader.exists",
+                "Лидер команды с таким ФИО уже существует");
 
-        if (teamDAO.itemSelectIdentifierInDao(team.getIdentifier()).isPresent()) {}
-            errors.rejectValue("identifier", "Identifier.exists",
-                    "Идентификатор команды уже существует");
+        if (teamDAO.itemSelectIdentifierInDao(team.getIdentifier()).isPresent()) {
+        }
+        errors.rejectValue("identifier", "Identifier.exists",
+                "Идентификатор команды уже существует");
     }
 }

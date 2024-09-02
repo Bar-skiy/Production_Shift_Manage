@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Сотрудник</title>
 </head>
 <body>
 
-<p th:text="${'Ф.И.О. сотрудника: ' + employee.getEmployee_name()}"> </p>
-<p th:text="${'Год рождения сотрудника: '+ employee.getBirth_year()}"> </p>
-<p th:text="${'Должность сотрудника: '+ employee.getFunction()}"> </p>
+<p th:text="${'Ф.И.О. сотрудника: ' + employee.getEmployee_name()}"></p>
+<p th:text="${'Год рождения сотрудника: '+ employee.getBirth_year()}"></p>
+<p th:text="${'Должность сотрудника: '+ employee.getFunction()}"></p>
 <br>
 <hr>
 <div th:if="${member}">
@@ -17,7 +17,7 @@
     <br>
     <br>
     <form th:method="PATCH" th:action="@{/employees/unpin/{employee_id}(employee_id=${employee.getEmployee_id()})}">
-        <input type="submit" value=  "Открепить!">
+        <input type="submit" value="Открепить!">
     </form>
 </div>
 

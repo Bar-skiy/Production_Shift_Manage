@@ -18,7 +18,8 @@ public class Team {
     @Max(value = 5009, message = "Номер должен быть меньше 5010!")
     private int identifier;
 
-    public Team() {}
+    public Team() {
+    }
 
     public Team(int team_id, String name_leader, int identifier) {
         this.team_id = team_id;
