@@ -8,6 +8,7 @@ import ru.bar.springs.models.Employee;
 import ru.bar.springs.models.Team;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TeamDAO {
@@ -20,20 +21,17 @@ public class TeamDAO {
     }
 
     public List<Team> AllSelectInDao() {
-        List<Team> all =
-                jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
-         if (all.isEmpty()) {return null;}
-         return all;
+         return jdbcTemplate.query("SELECT * FROM Team", new BeanPropertyRowMapper<>(Team.class));
     }
 
-    public Team itemSelectNameInDao(String name_leader) {
+    public Optional <Team> itemSelectNameInDao(String name_leader) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE name_leader=?", new Object[]{name_leader},
-                new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
+                new BeanPropertyRowMapper<>(Team.class)).stream().findAny();
     }
 
-    public Team itemSelectIdentifierInDao(int identifier) {
+    public Optional <Team> itemSelectIdentifierInDao(int identifier) {
         return jdbcTemplate.query("SELECT * FROM Team WHERE identifier=?", new Object[]{identifier},
-                new BeanPropertyRowMapper<>(Team.class)).stream().findAny().orElse(null);
+                new BeanPropertyRowMapper<>(Team.class)).stream().findAny();
     }
 
     public Team itemSelectInDao(int team_id) {
@@ -42,11 +40,8 @@ public class TeamDAO {
     }
 
     public List<Employee> getEmployeesInDao(int team_id) {
-        List<Employee> empl = jdbcTemplate.query("SELECT  employee_name, birth_year, function FROM team" +
-                " JOIN employee ON team.team_id = employee.team_id where employee.team_id = ?",
-                new BeanPropertyRowMapper<>(Employee.class), team_id);
-        if (empl.isEmpty()) {return null;}
-        return empl;
+        return jdbcTemplate.query("SELECT * FROM employee WHERE employee.team_id = ?",
+                new Object[]{team_id}, new BeanPropertyRowMapper<>(Employee.class));
     }
 
     public void saveInDao(Team team) {

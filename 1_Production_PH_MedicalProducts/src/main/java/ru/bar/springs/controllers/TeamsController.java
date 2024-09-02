@@ -34,8 +34,8 @@ public class TeamsController {
     @GetMapping("/{team_id}")
     public String itemShowInController(@PathVariable("team_id") int team_id, Model model) {
         model.addAttribute("team", teamDAO.itemSelectInDao(team_id));
-        //для показа листа сотрудников
- model.addAttribute("empl_list_team", teamDAO.getEmployeesInDao(team_id));
+        // для показа листа сотрудников
+       model.addAttribute("empl_list_team", teamDAO.getEmployeesInDao(team_id));
         return "teams/item";
     }
 

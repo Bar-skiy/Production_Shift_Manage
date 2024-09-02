@@ -6,34 +6,41 @@
 </head>
 <body>
 
-<p th:text="${employee.getEmployee_id()}"> </p>
 <p th:text="${'Ф.И.О. сотрудника: ' + employee.getEmployee_name()}"> </p>
 <p th:text="${'Год рождения сотрудника: '+ employee.getBirth_year()}"> </p>
 <p th:text="${'Должность сотрудника: '+ employee.getFunction()}"> </p>
-
-<p th:text="${join_ident} != null ? 'Этот сотрудник состоит в команде: ' :'Этот сотрудник свободен'"></p>
-<p th:text="${join_ident}"></p>
-
-<form th:method="PATCH" th:action="@{/employees/unpin/{employee_id}(employee_id=${employee.getEmployee_id()})}">
-    <input type="submit" value=  "Открепить!">
-</form>
-<hr>
-<br>
-
-<form th:method="PATCH" th:action="@{/employees/assign/{employee_id}(employee_id=${employee.getEmployee_id()})}">
-    <label for="p_label">Выберите человека:</label>
-
-    <select th:object="${team}" th:field="*{team_id}" id="p_label">
-        <option th:each="team_th : ${teams}" th:value="${team_th.getTeam_id()}"
-                th:text="${team_th.getIdentifier()}"></option>
-    </select>
-
-    <input type="submit" value="Назначить в команду">
-</form>
 <br>
 <hr>
-<a th:href="@{/employees/{employee_id}/edit(employee_id=${employee.getEmployee_id()})}">
-    Изменение данных</a>
+<div th:if="${member}">
+    <span>Этот сотрудник состоит в команде:</span>
+    <span th:text="${member.getIdentifier()}"></span>
+    <br>
+    <br>
+    <form th:method="PATCH" th:action="@{/employees/unpin/{employee_id}(employee_id=${employee.getEmployee_id()})}">
+        <input type="submit" value=  "Открепить!">
+    </form>
+</div>
+
+<div th:if="${teams}">
+    <span>Этот сотрудник свободен.</span>
+    <br>
+    <br>
+    <form th:method="PATCH" th:action="@{/employees/assign/{employee_id}(employee_id=${employee.getEmployee_id()})}">
+        <label for="p_label">Прикрепить сотрудника к команде: </label>
+        <select th:object="${team}" th:field="*{team_id}" id="p_label">
+            <option th:each="team_th : ${teams}" th:value="${team_th.getTeam_id()}"
+                    th:text="${team_th.getIdentifier()}"></option>
+        </select>
+
+        <input type="submit" value="Прикрепить">
+    </form>
+</div>
+<br>
+<hr>
+<form th:method="GET" th:action="@{/employees/{employee_id}/edit(employee_id=${employee.getEmployee_id()})}">
+    <input type="submit" value="Редактировать"/>
+</form>
+
 <br>
 <hr>
 <form th:method="DELETE" th:action="@{/employees/{employee_id}(employee_id=${employee.getEmployee_id()})}">

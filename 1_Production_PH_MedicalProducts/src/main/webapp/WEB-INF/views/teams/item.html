@@ -17,7 +17,7 @@
        ', ' + employee_th.getBirth_year()}"> //// В это место вставляются данные слева </a>
     <br/>
 </div>
-<P th:text="${empl_list_team} != null ? '' : 'В команде пока нет сотрудников'"></P>
+<P th:text="${empl_list_team.isEmpty()} ? 'В команде нет сотрудников'"></P>
 <br>
 <hr>
 <a th:href="@{/teams/{team_id}/edit(team_id=${team.getTeam_id()})}">Изменение данных</a>

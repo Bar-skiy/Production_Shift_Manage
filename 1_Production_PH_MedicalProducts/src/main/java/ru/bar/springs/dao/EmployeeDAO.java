@@ -5,8 +5,10 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.bar.springs.models.Employee;
+import ru.bar.springs.models.Team;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class EmployeeDAO {
@@ -20,15 +22,16 @@ public class EmployeeDAO {
 
     public List<Employee> AllSelectInDao() {
         List<Employee> all = jdbcTemplate.query("SELECT * FROM Employee", new BeanPropertyRowMapper<>(Employee.class));
-   if (all.isEmpty()) {return null;}
-   return all;
+        if (all.isEmpty()) {
+            return null;
+        }
+        return all;
     }
 
-
-    public Integer joinIdentInDao(int employee_id) {
-        return jdbcTemplate.queryForObject("SELECT (SELECT identifier FROM team JOIN employee " +
-                "ON team.team_id = employee.team_id where employee_id = ?) AS value", Integer.class, employee_id);
-
+    public Optional<Team> getIdentInDao(int employee_id) {
+        return jdbcTemplate.query("SELECT Team.* FROM team JOIN employee ON team.team_id =" +
+                        " employee.team_id where employee_id = ?", new Object[]{employee_id},
+                new BeanPropertyRowMapper<>(Team.class)).stream().findAny();
     }
 
     public Employee itemSelectInDao(int employee_id) {
@@ -54,8 +57,9 @@ public class EmployeeDAO {
         jdbcTemplate.update("UPDATE employee SET team_id = null WHERE employee_id = ?;", employee_id);
     }
 
-    public void assignInDao(int team_id, int employee_id) {
-        jdbcTemplate.update("UPDATE employee SET team_id = ? WHERE employee_id = ?;", team_id, employee_id);
+    public void assignInDao(int employee_id, Team selectedTeam) {
+        jdbcTemplate.update("UPDATE employee SET team_id = ? WHERE employee_id = ?;",
+                selectedTeam.getTeam_id(), employee_id);
     }
 }
 
