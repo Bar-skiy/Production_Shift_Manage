@@ -37,4 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.1_Production_PH_MedicalProducts/src/main/resources/database.properties
+/1_Production_PH_MedicalProducts/src/main/resources/database.properties
